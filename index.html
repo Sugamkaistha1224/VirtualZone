@@ -1,0 +1,821 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Load Fonts -- https://fonts.google.com/specimen/Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap" rel="stylesheet">
+    <!-- Load Icons -- https://material.io/resources/icons/ -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+   <style type="text/css">
+       body {
+  color:#0F171F;
+  margin: 0px;
+  font-family: 'Roboto';
+}
+
+h1 {
+  font-family: 'Roboto';
+  font-weight: 900;
+}
+h3{
+  font-family: 'Roboto';
+  font-weight: 900;
+}
+
+img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  display:block;
+}
+
+/********   DASHBOARD COMPONENT STYLING   ********/
+
+/* Colour, shape and position of the search bar: */
+.searchContainer{
+  position: absolute;
+  top: 170px;
+  left: 5%;
+}
+.searchBar{
+  color: #B8C0C7;
+  background-color: #F0F1F3;
+  width: 400px;
+  height: 35px;
+  padding-left: 60px;;
+  border: none;
+  border-radius: 18px;
+  font-size: medium;
+  font-family: 'Roboto';
+}
+::placeholder{
+  color: #B8C0C7;
+}
+.searchText{
+  padding-left: 20px;
+  display: inline-block;
+}
+
+/*Colour, shape and position of the sort button: */
+.sortContainer {
+  position: absolute;
+  top: 180px;
+  right: 6%;
+}
+.sortContainer label{
+  color: #B8C0C7;
+  padding-right: 10px;
+  font-weight: bolder;
+  font-size: small;
+}
+.sortContainer select{
+  color: white;
+  background-color: #446CFC;
+  width: 175px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  font-size: small;
+  font-weight: bold;
+  font-family: 'Roboto';
+  -webkit-appearance: none;
+}
+.sortContainer option{
+  color: #ffffff;
+  font-size: small;
+  font-family: 'Roboto';
+}
+
+/* Custom arrow icon for sort button: */
+.sortArrow{
+  position: absolute;
+  top:10px;
+  left:200px;
+  border: solid #0D34C0;
+  border-width: 0 2px 2px 0;
+  padding: 4px;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Custom sort icon for sort text: */
+.sortBars{
+  position: absolute;
+  top: 10px;
+  left:-30px;
+  width: 20px;
+  border-radius: 0px 0px;
+}
+.sortBarTop{
+  background-color: #B8C0C7;
+  width: 20px;
+  height: 2px;
+  margin-bottom: 3px;
+}
+.sortBarMiddle{
+  background-color: #B8C0C7;
+  width: 15px;
+  height: 2px;
+  margin-bottom: 3px;
+}
+.sortBarBottom{
+  background-color: #B8C0C7;
+  width: 10px;
+  height: 2px;
+}
+
+/* Grid and spacing for course cards to populate */
+.courses {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 5%;
+  padding-top: 9%;
+  padding-left: 5%;
+  padding-right: 5%
+}
+
+/********   DASHBOARD-HEADER COMPONENT STYLING   ********/
+
+/* Padding and color */
+.header {
+  box-shadow: 0px 5px 10px #F0F1F3;
+  padding-left: 5%;
+}
+
+/* Colour, position and interaction styling */
+.tab {
+  overflow: hidden;
+}
+.tab button  {
+  color: #B8C0C7;
+  background-color: inherit;
+  width: 175px;
+  float: left;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  font-family: 'Roboto';
+  font-weight: 900;
+}
+.tab button:hover {
+  background-color: #F0F1F3;
+}
+.tab button.activeTab {
+  color: #0F171F;
+  box-shadow: inset 0px -5px #446CFC;
+}
+.tab button.activeTab > span{
+  background: #446CFC;
+}
+.tab button > span {
+  color: white;
+  background: #B8C0C7;
+  width: 25px;
+  height: 25px;
+  padding: 4px 5px;
+  border-radius: 4px;
+  float: right;
+  box-sizing: border-box;
+  font-size: smaller;
+}
+
+/********   CARD-CONTENTS COMPONENT STYLING   ********/
+
+/* Colour, padding and interaction styling */
+.courseCard {
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  height: 700px;
+  padding: 0px 0px;
+  border-radius: 15px;
+  text-align: left;
+}
+.courseCard:hover{
+  position: relative;
+  top: -25px;
+}
+.courseCard:hover .hiddenButton{
+  visibility: visible;
+}
+
+/* Position styling */
+.cardDetailsContainer {
+  height: 300px;
+  padding: 15px 45px;
+  font-size: large;
+}
+
+
+/* Styling for course progress bar */
+.progressBar{
+  background-color: #F0F1F3;
+  min-height: 10px;
+}
+.progressBar div{
+  background-color: #00E6C0;
+  min-height: 10px;
+}
+
+/* Styling for progress details */
+.completeModule{
+  color: #00E6C0;
+  font-size: large;
+  font-weight: bold;
+}
+.incompleteModule{
+  color: #B8C0C7;
+  font-size: large;
+  font-weight: bold;
+}
+
+/********   CARD-BUTTON COMPONENT STYLING   ********/
+
+/* Colour, position, shape styling */
+.genericButton {
+  color: white;
+  background-color: #446CFC;
+  position: relative;
+  bottom: 25px;
+  left: 52%;
+  width: 35%;
+  border: none;
+  padding: 15px 32px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Roboto';
+}
+.genericButton:active {
+  background-color: #0D34C0;
+}
+
+/* Will only show when hovered over */
+.hiddenButton {
+  color: #B8C0C7;
+  background-color: white;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  bottom: 25px;
+  right: 22%;
+  width: 35%;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 16px;
+  font-family: 'Roboto';
+  visibility: hidden;
+}
+
+/********** DUE DATE STYLING ********/
+
+.reminderContainer{
+  color: white;
+  background-color: #0F171F;
+  opacity: 0.7;
+  position: absolute;
+  width: 160px;
+  height: 50px;
+  margin-top: 15px;
+  margin-left: 325px;
+  border-radius: 8px;
+  align-items: center;
+}
+.reminderText{
+  padding-left: 8px;
+  display: inline-block;
+}
+
+
+/*********** ICON STYLING ********/
+.searchContainer i{
+  color: #B8C0C7;
+  position: absolute;
+  top: 15px;
+  left:15px;
+  display: inline-block;
+}
+
+.reminderContainer i{
+  top: 5px;
+  display: inline-block;
+  padding-left: 15px;
+}
+   </style>
+</head>
+<body>
+     
+    <div id="app">
+        <dashboard></dashboard>
+    </div> 
+    
+    <script src="https://kit.fontawesome.com/6c7cca3104.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script type="text/javascript">
+        var eventBus = new Vue()
+
+Vue.component('dashboard', {
+    template: `
+    <div class="dashboard">   
+      
+      <dashboard-header v-bind:courses="courses"></dashboard-header>  
+      
+      <div class="sortContainer">
+        <label for="sortOptions">Sort by</label>
+        <div class="sortBars">
+          <div class="sortBarTop"></div>
+          <div class="sortBarMiddle"></div>
+          <div class="sortBarBottom"></div>
+        </div>
+        <i class="sortArrow""></i>
+        <select id="sortOptions" v-on:change="sortBy($event)">
+          <option class="selectOption" v-bind:value="'dateEnrolled'">Date enrolled</option>
+          <option class="selectOption" v-bind:value="'courseTitle'">Course title</option>
+          <option class="selectOption" v-bind:value="'dueDate'">Due date</option>
+          <option class="selectOption" v-bind:value="'progress'">Progress</option>
+        </select>
+      </div>
+
+      <div class="courses" v-if="selectedTab == 'To Do'">
+        <div class="searchContainer">
+          <i class="material-icons">search</i>
+          <input class="searchBar" v-model="searchText" placeholder="Search courses"/>
+          <p class="searchText"><b>{{filterToDo.length}}</b> out of {{courses.length}} courses match your search</p>      
+        </div>
+
+        <div v-for="course in filterToDo " class="courseCard">
+            <card-contents v-bind:course="course"></card-contents>
+        </div>
+      </div>
+      
+      <div class="courses" v-else-if="selectedTab == 'In Progress'">
+        <div class="searchContainer">
+          <i class="material-icons">search</i>
+          <input class="searchBar" v-model="searchText" placeholder="Search courses"/>
+          <p class="searchText"><b>{{filterInProg.length}}</b> out of {{courses.length}} courses match your search</p>      
+        </div>
+
+        <div v-for="course in filterInProg" class="courseCard">
+            <card-contents v-bind:course="course"></card-contents>
+        </div>
+      </div>
+      
+      <div class="courses" v-else-if="selectedTab == 'Completed'">
+        <div class="searchContainer">
+          <i class="material-icons">search</i>
+          <input class="searchBar" v-model="searchText" placeholder="Search courses"/>
+          <p class="searchText"><b>{{filterComplete.length}}</b> out of {{courses.length}} courses match your search</p>      
+        </div>
+        
+        <div v-for="course in filterComplete" class="courseCard">
+            <card-contents v-bind:course="course"></card-contents>
+        </div>
+      </div>
+
+      <div class="courses" v-else>
+        <div class="searchContainer">
+          <i class="material-icons">search</i>
+          <input class="searchBar" v-model="searchText" placeholder="Search courses"/>
+          <p class="searchText"><b>{{filterAll.length}}</b> out of {{courses.length}} courses match your search</p>      
+        </div>
+
+        <div v-for="course in courses" class="courseCard">
+            <card-contents v-bind:course="course"></card-contents>
+        </div>
+      </div>
+    </div>
+    `,
+  data() {
+  return {
+    searchText: '',
+    selectedTab: 'To Do',
+    courses: [
+      {
+        image: 'https://www.worshipavl.com/img/k0z9bbgbwnbp8qqdckgxnn0f.jpeg',
+        alt: '360-Auditorium-Beta: Testing Phase',
+        title: '360-Auditorium-Beta: Testing Phase',
+        description: 'The 360-Auditorium-Beta is an innovative project currently in its testing phase, designed to offer a cutting-edge immersive experience for audiences. This project aims to push the boundaries of virtual interaction, providing users with a fully interactive 360° environment. The auditorium is crafted to simulate a realistic, dynamic space, bringing users closer to the action with panoramic visuals and spatial audio.',
+        daysRemaining: 6,
+        dateEnrolled: '02 March 2025',
+        progress: 3,
+        id: 1,
+        isEnrolled: true,
+        inProgress: true,
+        isComplete: false,
+        toggleProgress: false,
+        resumeLink: 'https://sugam-navation.w3spaces.com/360-auditorium-beta.html'
+      },
+      {
+        image: 'https://images.unsplash.com/photo-1545922016-87c93aaca2ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80',
+        alt: '360-Degree Analysis of Commercial Jet Crashes',
+        title: '360-Degree Analysis of Commercial Jet Crashes',
+        description: 'This immersive 360-degree analysis visualizes the survival rates of passengers in commercial jet crashes, focusing specifically on how seat position affects the likelihood of survival. Based on data from all commercial jet crashes in the United States since 1971, this analysis reveals intriguing insights into the impact of seating arrangements on passenger safety.',
+        daysRemaining: 30,
+        dateEnrolled: '24 Jan 2025',
+        progress: 2,
+        isEnrolled: true,
+        inProgress: true,
+        isComplete: false,
+        toggleProgress: false,
+        resumeLink: 'https://sugam-navation.w3spaces.com/360-Pane.html'
+      },
+      {
+        image: 'https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-3710-622f-9e0b-6be4b6fda8c1/raw?se=2025-04-26T22%3A47%3A19Z&sp=r&sv=2024-08-04&sr=b&scid=1eaad859-a374-5d67-b234-81662a389c33&skoid=a3336399-497e-45e5-8f28-4b88ecca3d1f&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-26T21%3A41%3A07Z&ske=2025-04-27T21%3A41%3A07Z&sks=b&skv=2024-08-04&sig=dDNCef3skjSA30Iy%2BZuVWhwvl7j4g5ykf3GMzgsEUsg%3D',
+        alt: 'the-perfect-roast',
+        title: '360-Degree Geo Map Address Plotter',
+        description: 'This innovative tool allows users to plot specific addresses on an interactive 360-degree geo map, offering an immersive and detailed experience of geographical locations. Perfect for businesses, travel enthusiasts, or anyone who wants a deeper understanding of locations, this plotter enhances the way we interact with maps by offering a full panoramic view of any chosen address or location.',
+        daysRemaining: 3,
+        dateEnrolled: '07 March 2025',
+        progress: 1,
+        isEnrolled: true,
+        inProgress: true,
+        isComplete: false,
+        toggleProgress: false,
+        resumeLink: 'https://sugam-navation.w3spaces.com/Geo-Address-ploter.html'
+      },
+      {
+        image: 'data:image/jpeg;base64,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',
+        alt: 'cosmetology-basics',
+        title: '360-Degree Aircraft Carrier Sound Level Measurement',
+        description: 'This project involves the creation of a 360-degree model of an aircraft carrier, focusing on sound level measurements in berthing areas. It highlights the impact of noise from flight operations, maintenance, and support functions, which often exceed safe limits (70 dBA).',
+        daysRemaining: 8,
+        dateEnrolled: '11 March 2025',
+        progress: 2,
+        isEnrolled: true,
+        inProgress: true,
+        isComplete: false,
+        toggleProgress: false,
+        resumeLink: 'https://sugam-navation.w3spaces.com/360-Aircraft-Carrier.html'
+      },
+      {
+        image: 'data:image/jpeg;base64,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',
+        title: 'Mars VR Experience',
+        description: 'This immersive VR experience takes users on a journey to Mars, allowing them to explore the red planet’s surface in stunning detail. By simulating the environment, terrain, and key landmarks of Mars, the experience offers an engaging and educational way to visualize the planet’s unique features, making it perfect for science enthusiasts, students, and space explorers.',
+        daysRemaining: 30,
+        dateEnrolled: '12 March 2020',
+        progress: 2,
+        isEnrolled: true,
+        inProgress: true,
+        isComplete: false,
+        toggleProgress: false,
+        resumeLink: 'https://sugam-navation.w3spaces.com/Mars-VR.html'
+      },/*
+            {
+              image: 'https://images.unsplash.com/photo-1500468756762-a401b6f17b46?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
+              title: 'Get Motivated!',
+              description: 'At minimum, motivation requires the biological substrate for physical sensations of pleasure and pain; animals can thus want or disdain specific objects based on sense perception and experience.',
+              daysRemaining: 30,
+              dateEnrolled: '31 December 9999',
+              progress: 0,
+              isEnrolled: false,
+              inProgress: false,
+              isComplete: false,
+              toggleProgress: false
+            },
+            {
+              image: 'https://images.unsplash.com/photo-1532330384785-f94c84352e91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1299&q=80',
+              title: 'Public Transport Tips',
+              description: 'Public transport (also known as public transportation, public transit, or mass transit) is a system of transport, in contrast to private transport, for passengers by group travel systems available for use by the general public, typically managed on a schedule, operated on established routes, and that charge a posted fee for each trip.',
+              daysRemaining: 30, 
+              dateEnrolled: '31 December 9999',
+              progress: 0,
+              isEnrolled: false,
+              inProgress: false,
+              isComplete: false,
+              toggleProgress: false
+            },
+            {
+              image: 'https://images.unsplash.com/photo-1520390138845-fd2d229dd553?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80',
+              title: 'The Art of Photography',
+              description: 'Photography is the art, application and practice of creating durable images by recording light or other electromagnetic radiation, either electronically by means of an image sensor, or chemically by means of a light-sensitive material such as photographic film.',
+              daysRemaining: 30,
+              dateEnrolled: '31 December 9999',
+              progress: 0,
+              isEnrolled: false,
+              inProgress: false,
+              isComplete: false,
+              toggleProgress: false
+            },
+            {
+              image: 'https://images.unsplash.com/photo-1504197885-609741792ce7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+              alt: 'venturing-venice',
+              title: 'Venturing Venice',
+              description: 'Venice is a city in northeastern Italy and the capital of the Veneto region. It is situated on a group of 118 small islands that are separated by canals and linked by over 400 bridges.',
+              daysRemaining: 30,
+              dateEnrolled: '31 December 9999',
+              progress: 0,
+              isEnrolled: false,
+              inProgress: false,
+              isComplete: false,
+              toggleProgress: false
+            }*/
+          ]
+      }
+    },
+    methods: {
+      // sorts the courses based on event input
+      sortBy(event){
+        if (event.target.value == 'courseTitle'){
+          function compare(a, b) {
+            if (a.title < b.title)
+              return -1;
+            if (a.title > b.title)
+              return 1;
+            return 0;
+          }
+          return this.courses.sort(compare);
+        }  
+        else if (event.target.value == 'progress'){
+          function compare(a, b) {
+            return a.progress - b.progress;
+          }
+          return this.courses.sort(compare);
+        }  
+        else if (event.target.value == 'dateEnrolled'){
+          function compare(a, b) {
+            var dateA = new Date(a.dateEnrolled);
+            var dateB = new Date(b.dateEnrolled);
+            return dateA - dateB;
+          }
+          return this.courses.sort(compare);
+        }
+        else if (event.target.value == 'dueDate'){
+          function compare(a, b) {
+            return a.daysRemaining - b.daysRemaining;
+          }
+          return this.courses.sort(compare);
+        }
+      }
+    },
+    computed: {
+      filterToDo: function() {
+        var returnList = [];
+        var self = this;
+
+        for (let i = 0; i < this.courses.length; i++) { 
+          var course = this.courses[i]
+          if (course.isEnrolled){
+              returnList.push(course);
+          }      
+        }
+
+        if(this.searchText == ''){
+          return returnList;
+        }
+        return returnList.filter(function(course){
+          return course.title.indexOf(self.searchText) >= 0;
+        });
+      },
+
+      filterInProg: function() {
+        var returnList = [];
+        var self = this;
+
+        for (let i = 0; i < this.courses.length; i++) { 
+          var course = this.courses[i]
+          if (course.inProgress){
+              returnList.push(course);
+          }      
+        }
+
+        if(this.searchText == ''){
+          return returnList;
+        }
+        return returnList.filter(function(course){
+          return course.title.indexOf(self.searchText) >= 0;
+        });
+      },
+
+      filterComplete: function() {
+        var returnList = [];
+        var self = this;
+
+        for (let i = 0; i < this.courses.length; i++) { 
+          var course = this.courses[i]
+          if (course.isComplete){
+              returnList.push(course);
+          }      
+        }
+
+        if(this.searchText == ''){
+          return returnList;
+        }
+        return returnList.filter(function(course){
+          return course.title.indexOf(self.searchText) >= 0;
+        });
+      },
+
+      filterAll: function() {
+        var self = this;
+        if(this.searchText == ''){
+          return this.courses;
+        }
+        return this.courses.filter(function(course){
+          return course.title.indexOf(self.searchText) >= 0;
+        });
+      }
+    },
+    mounted() {
+      eventBus.$on('update-selected-tab', tab => {
+        this.selectedTab = tab;
+      })
+    }
+  })
+
+  Vue.component('dashboard-header', {
+    props: {
+      courses: {
+        type: Array,
+        required: true
+      }
+    },
+
+    template: `
+      <div class="header">
+        <h1>Virtual Zone</h1>
+
+        <div class="tab">
+          <button
+          v-bind:class="{ activeTab: selectedTab === tab }"
+          v-for="(tab, index) in tabs"
+          v-bind:key="index"
+          v-on:click="updateSelected(tab)"
+          >{{ tab }} 
+            <span v-if="tab === 'To Do'">
+              {{countEnrolled}}
+            </span> 
+            <span v-else-if="tab === 'In Progress'">
+              {{countInProgress}}
+            </span> 
+            <span v-else-if="tab === 'Completed'">
+              {{countComplete}}
+            </span> 
+            <span v-else>
+              {{countTotal}}
+            </span> 
+          </button>
+        </div>
+      </div>
+    `,
+
+    data() {
+      return {
+        tabs: ['To Do', 'In Progress', 'Completed', 'All courses'],
+        selectedTab: 'To Do'
+      }
+    },
+
+    methods: {
+      updateSelected(tab){
+        this.selectedTab = tab;
+        eventBus.$emit('update-selected-tab', tab);
+      }
+    },
+
+    computed: {
+      countEnrolled(){
+        var count = 0;
+        for (let i = 0; i < this.courses.length; i++) { 
+          var course = this.courses[i];
+          if (course.isEnrolled)
+            count++;           
+        }
+        return count;
+      },
+
+      countInProgress(){
+        var count = 0;
+        for (let i = 0; i < this.courses.length; i++) { 
+          var course = this.courses[i];
+          if (course.inProgress)
+            count++;        
+        }
+        return count;
+      },
+
+      countComplete(){
+        var count = 0;
+        for (let i = 0; i < this.courses.length; i++) { 
+          var course = this.courses[i];
+          if (course.isComplete)
+            count++ ;           
+        }
+        return count;
+      },
+
+      countTotal(){
+        return this.courses.length;
+      },
+    }
+  })
+
+  Vue.component('card-contents', {
+    props: {
+      course: Object
+    },
+
+    template: `
+      <div>
+        <div v-if="course.daysRemaining < 10">
+          <div class="reminderContainer">
+            <i class="fas fa-calendar-day fa-lg"></i>
+            <p class="reminderText">Due in <b>{{course.daysRemaining}} days</b></p>
+          </div>
+        </div>
+        <img v-bind:src="course.image" v-bind:alt="course.alt">
+        
+        <div class="progressBar">
+          <div v-bind:style="'width:'+ (course.progress * 20) + '%'"></div>
+        </div>
+        <div class="cardDetailsContainer">
+          <h3>{{course.title}}</h3>
+          <div v-if="!course.toggleProgress">
+            <p>{{course.description}}</p>
+          </div>
+          <div v-else>
+            <ul>
+              <li v-for="(module, i) in modules">
+                <p v-if="completeModules(course.progress, i)" class="completeModule">{{module}}</p>
+                <p v-else class="incompleteModule">{{module}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <card-button v-bind:course="course"></card-button>  
+      </div>
+    `,
+
+    data() {
+      return {
+        modules: ['Course Introduction', 'Course Essentials', 'Course Mastery', 'Course Challenges', 'Course Review']
+      }
+    },
+
+    methods: {
+      completeModules(progress, index) {
+        if (index < progress)
+          return true;
+        else 
+          return false;
+      }
+    }
+  })
+
+  Vue.component('card-button', {
+    props: {
+      course: Object
+    },
+
+    template: `
+      <div>
+      <a v-if="course.inProgress" class="genericButton" v-bind:href="course.resumeLink" target="_blank" >Try this</a>
+      <button class="genericButton" v-else-if="course.isComplete" @click="resumeCourse(course)">Start</button>
+<button class="genericButton" v-else-if="course.isEnrolled && !course.inProgress" @click="startCourse(course)">Start</button>
+
+      <button class="genericButton" v-else>Enrol</button>
+      <button class="hiddenButton" v-if="!toggle" v-on:click="updateToggle(course)">View Progress</button>
+      <button class="hiddenButton" v-else v-on:click="updateToggle(course)">View Details</button>
+    </div>
+    `,
+    data() {
+      return {
+        toggle: false
+      }
+    },
+
+    methods: {        
+      updateToggle(course) {
+        if (this.toggle)
+        {
+          this.toggle = false;
+          course.toggleProgress = false;
+        }
+        else 
+        {
+          this.toggle = true;
+          course.toggleProgress = true;
+        }
+      }
+    }
+  })
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    test: 'test'
+  }
+})
+    </script>
+</body>
+</html>
